@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculator {
+      text-align: center;
+    }
+
+    input, button {
+      margin: 5px;
+    }
+
+    .result-container {
+      margin-top: 20px;
+    }
+
+    .imc-result, .situation {
+      margin-bottom: 10px;
+    }
+
+    .normal {
+      color: green;
+    }
+
+    .warning {
+      color: orange;
+    }
+
+    .danger {
+      color: red;
+    }
+  </style>
+  <title>Calculadora IMC</title>
+</head>
+<body>
+  <div class="calculator">
+    <label for="weight">Peso (kg):</label>
+    <input type="number" id="weight" placeholder="Informe o peso">
+
+    <label for="height">Altura (m):</label>
+    <input type="number" id="height" placeholder="Informe a altura">
+
+    <button onclick="calculateIMC()">Calcular IMC</button>
+
+    <div id="result" class="result-container">
+      <div class="imc-result">Seu IMC é: <span id="imc-value"></span></div>
+      <div class="situation">Situação: <span id="situation-value"></span></div>
+    </div>
+  </div>
+
+  <script>
+    function calculateIMC() {
+      var weight = document.getElementById('weight').value;
+      var height = document.getElementById('height').value;
+
+      if (weight && height) {
+        var imc = weight / (height * height);
+        var imcValueElement = document.getElementById('imc-value');
+        var situationValueElement = document.getElementById('situation-value');
+
+        imcValueElement.textContent = imc.toFixed(2);
+
+        var situation = '';
+        
+        if (imc < 18.5) {
+          situation = 'Abaixo do peso';
+          situationValueElement.className = 'danger';
+        } else if (imc >= 18.5 && imc < 25) {
+          situation = 'Peso normal';
+          situationValueElement.className = 'normal';
+        } else if (imc >= 25 && imc < 30) {
+          situation = 'Sobrepeso';
+          situationValueElement.className = 'warning';
+        } else if (imc >= 30 && imc < 35) {
+          situation = 'Obesidade grau 1';
+          situationValueElement.className = 'warning';
+        } else if (imc >= 35 && imc < 40) {
+          situation = 'Obesidade grau 2';
+          situationValueElement.className = 'danger';
+        } else {
+          situation = 'Obesidade grau 3 (obesidade mórbida)';
+          situationValueElement.className = 'danger';
+        }
+
+        situationValueElement.textContent = situation;
+      } else {
+        alert('Por favor, informe peso e altura.');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 3</title>
+</head>
+<body></body>
+</html>
+
+<head>
+  <style>
+    .red {
+      color: rgba(116, 1, 1, 0.714);
+    }
+
+    .blue {
+      color: rgba(255, 72, 0, 0.888);
+    }
+
+    .green {
+      color: rgb(234, 255, 0);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>The Element Object</h1>
+  <h2>The appendChild() Method</h2>
+
+  <ul id="myList">
+    <li>Cardápio</li>
+    <li>Bebida</li>
+  </ul>
+
+  <p>
+    <label for="itemText">Insira o texto do item:</label>
+    <input type="text" id="itemText">
+  </p>
+
+  <p>Escolha a cor do item:</p>
+  <label>
+    <input type="radio" name="itemColor" value="red"> vermelho escuro
+  </label>
+  <label>
+    <input type="radio" name="itemColor" value="blue"> Vermelho
+  </label>
+  <label>
+    <input type="radio" name="itemColor" value="green"> Amarelo 
+  </label>
+
+  <p>Clique em "Anexar" para anexar um item ao final da lista:</p>
+
+  <button id="appendButton">Acrescentar</button>
+
+  <script>
+    document.getElementById("appendButton").addEventListener("click", function() {
+
+      const itemText = document.getElementById("itemText").value;
+
+     
+      const node = document.createElement("li");
+
+      
+      const textnode = document.createTextNode(itemText);
+
+     
+      node.appendChild(textnode);
+
+    
+      const colorOptions = document.getElementsByName("itemColor");
+      let selectedColor;
+      for (const option of colorOptions) {
+        if (option.checked) {
+          selectedColor = option.value;
+          break;
+        }
+      }
+
+     
+      if (selectedColor === "red") {
+        node.classList.add("red");
+      } else if (selectedColor === "blue") {
+        node.classList.add("blue");
+      } else if (selectedColor === "green") {
+        node.classList.add("green");
+      }
+
+      
+      document.getElementById("myList").appendChild(node);
+    });
+  </script>
+
+</body>
+
+</html>
